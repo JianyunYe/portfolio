@@ -3,4 +3,72 @@ body {
          and use the OS’s UI font as the website font
        */
     font: 100%/1.5 system-ui;
+    max-width: 100ch;
+    margin-inline: auto;
+    padding-inline: 1em;
   }
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1em;
+    border-bottom: 1px solid oklch(80% 3% 200);
+}
+
+nav a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5em;
+}
+
+nav a.current {
+  border-bottom: 0.4em solid oklch(80% 3% 200);
+  padding-bottom: 0.1em;
+  font-weight: bold;
+}
+
+:root {
+  --color-accent: oklch(65% 50% 0);
+  accent-color: var(--color-accent);
+}
+
+nav a:hover {
+  border-bottom: 0.4em solid var(--color-accent);
+  background-color: oklch(95% 5% 0 / 20%);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+input, textarea, button {
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+  margin-block: 2em;
+}
+
+form label {
+  grid-column: 1 / -1; 
+}
+
+form input, form textarea {
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+form button {
+  grid-column: 1 / -1; 
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1.5em;
+  margin-block: 2em;
+}
