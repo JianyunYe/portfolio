@@ -139,3 +139,14 @@ a {
   padding: 0.5rem;
   border-radius: 0.25rem;
 }
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+}
+
+select {
+  font-family: inherit;
+}
