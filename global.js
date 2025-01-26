@@ -35,6 +35,12 @@ const pages = [
     nav.append(a);
   }
   
+  function setColorScheme(colorScheme) {
+    document.documentElement.style.setProperty('color-scheme', colorScheme);
+    select.value = colorScheme;
+    localStorage.colorScheme = colorScheme;
+  }
+  
   const detectColorScheme = () =>
     matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   
