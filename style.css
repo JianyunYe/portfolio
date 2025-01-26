@@ -130,3 +130,12 @@ nav {
 a {
   border-bottom-color: var(--border-color);
 }
+
+.color-scheme {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: canvas;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
