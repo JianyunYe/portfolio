@@ -23,14 +23,14 @@ const pages = [
     a.href = url;
     a.textContent = title;
     
+    if (url.startsWith('http')) {
+      a.target = "_blank";
+    }
+    
     a.classList.toggle(
       'current',
       a.host === location.host && a.pathname === location.pathname
     );
-    
-    if (a.host !== location.host) {
-      a.target = "_blank";
-    }
     
     nav.append(a);
   }
