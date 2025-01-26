@@ -50,3 +50,7 @@ const pages = [
     </label>`
   );
   
+  const select = document.querySelector('.color-scheme select');
+  select.addEventListener('input', function(event) {
+    document.documentElement.style.setProperty('color-scheme', event.target.value);
+  });
