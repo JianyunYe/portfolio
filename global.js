@@ -51,6 +51,9 @@ const pages = [
   );
   
   const select = document.querySelector('.color-scheme select');
-  select.addEventListener('input', function(event) {
-    document.documentElement.style.setProperty('color-scheme', event.target.value);
+  if ("colorScheme" in localStorage) {
+    setColorScheme(localStorage.colorScheme);
+  }
+  select.addEventListener('input', (event) => {
+    setColorScheme(event.target.value)
   });
