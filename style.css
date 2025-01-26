@@ -36,7 +36,7 @@ nav a.current {
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
-  background-color: oklch(95% 5% 0 / 20%);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   transition: background-color 0.3s, border-color 0.3s;
 }
 
@@ -116,4 +116,17 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
   margin-top: 0;
   margin-bottom: 0.5em;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+nav {
+  --border-color: oklch(50% 10% 200 / 40%);
+  border-bottom-color: var(--border-color);
+}
+
+a {
+  border-bottom-color: var(--border-color);
 }
