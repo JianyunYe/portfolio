@@ -79,3 +79,26 @@ const pages = [
         console.error('Error fetching or parsing JSON data:', error);
     }
 }
+
+export async function renderProjects() {
+  const url = '../lib/projects.json';
+  const projectsContainer = document.querySelector('.projects');
+
+  try {
+      const projects = await fetchJSON(url);
+
+      projects.forEach((project) => {
+          const projectElement = document.createElement('article');
+          projectElement.innerHTML = `
+              <h2>${project.title}</h2>
+              <img src="${project.image}" alt="${project.title}" />
+              <p>${project.description}</p>
+          `;
+          projectsContainer.appendChild(projectElement);
+      });
+
+      console.log('Projects rendered successfully!');
+  } catch (error) {
+      console.error('Error rendering projects:', error);
+  }
+}
