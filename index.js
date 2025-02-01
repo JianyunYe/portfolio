@@ -1,8 +1,8 @@
-import { fetchJSON, renderProjects } from './global.js';
+import { fetchJSON, renderProjects } from '/portfolio/global.js';
 
 (async () => {
     try {
-        const projects = await fetchJSON('./lib/projects.json');
+        const projects = await fetchJSON('/portfolio/lib/projects.json');
 
         const latestProjects = projects.slice(0, 3);
 
