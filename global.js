@@ -80,25 +80,47 @@ const pages = [
     }
 }
 
-export async function renderProjects() {
-  const url = '../lib/projects.json';
-  const projectsContainer = document.querySelector('.projects');
-
-  try {
-      const projects = await fetchJSON(url);
-
-      projects.forEach((project) => {
-          const projectElement = document.createElement('article');
-          projectElement.innerHTML = `
-              <h2>${project.title}</h2>
-              <img src="${project.image}" alt="${project.title}" />
-              <p>${project.description}</p>
-          `;
-          projectsContainer.appendChild(projectElement);
-      });
-
-      console.log('Projects rendered successfully!');
-  } catch (error) {
-      console.error('Error rendering projects:', error);
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  if (!Array.isArray(projects) || !containerElement || !(containerElement instanceof Element)) {
+      console.error('Invalid parameters passed to renderProjects.');
+      return;
   }
+
+  const titleElement = document.querySelector('.projects-title');
+  if (titleElement) {
+    titleElement.textContent = `${projects.length} Projects`;
+  }
+
+  if (projects.length === 0) {
+      containerElement.innerHTML = '<p>No projects found.</p>';
+      return;
+  }
+
+  containerElement.innerHTML = '';
+
+  const validHeadings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  if (!validHeadings.includes(headingLevel)) {
+      headingLevel = 'h2';
+  }
+
+  projects.forEach((project) => {
+      const title = project.title || 'Untitled Project';
+      const image = project.image || 'https://via.placeholder.com/150';
+      const description = project.description || 'No description available.';
+
+      const article = document.createElement('article');
+      article.innerHTML = `
+          <${headingLevel}>${title}</${headingLevel}>
+          <img src="${image}" alt="${title}" onerror="this.src='https://via.placeholder.com/150';">
+          <p>${description}</p>
+      `;
+
+      containerElement.appendChild(article);
+  });
+
+  console.log('Projects rendered successfully!');
+}
+
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
 }
