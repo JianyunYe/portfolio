@@ -26,3 +26,5 @@ import { fetchGitHubData } from '/portfolio/global.js';
         console.error("Error fetching GitHub data:", error);
     }
 })();
+
+const profileStats = document.querySelector('#profile-stats');
