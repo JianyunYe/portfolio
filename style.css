@@ -150,3 +150,21 @@ a {
 select {
   font-family: inherit;
 }
+
+.github-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 400px;
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.github-stats dt {
+  font-weight: bold;
+}
+
+.github-stats dd {
+  margin: 0;
+}
