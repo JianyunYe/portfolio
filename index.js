@@ -1,4 +1,4 @@
-import { fetchJSON, renderProjects } from '/portfolio/global.js';
+import { fetchJSON, renderProjects, fetchGitHubData } from '/portfolio/global.js';
 
 (async () => {
     try {
@@ -10,21 +10,22 @@ import { fetchJSON, renderProjects } from '/portfolio/global.js';
 
         renderProjects(latestProjects, projectsContainer, 'h2');
 
-    } catch (error) {
-        console.error('Fail to load the latest projects:', error);
-    }
-})();
-
-import { fetchGitHubData } from '/portfolio/global.js';
-
-(async () => {
-    try {
         const githubData = await fetchGitHubData("JianyunYe");
         console.log("GitHub Data:", githubData);
 
+        const profileStats = document.querySelector('#profile-stats');
+        if (profileStats) {
+            profileStats.innerHTML = `
+                <h2>GitHub Profile Stats</h2>
+                <dl class="github-stats">
+                    <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
+                    <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
+                    <dt>Followers:</dt><dd>${githubData.followers}</dd>
+                    <dt>Following:</dt><dd>${githubData.following}</dd>
+                </dl>
+            `;
+        }
     } catch (error) {
-        console.error("Error fetching GitHub data:", error);
+        console.error("Error loading data:", error);
     }
 })();
-
-const profileStats = document.querySelector('#profile-stats');
