@@ -1,10 +1,14 @@
-name: Checkout
+name: Deploy Site
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+
+concurrency: 
+  group: pre-deploy
+  cancel-in-progress: false
 
 permissions:
   contents: write
