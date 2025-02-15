@@ -1,62 +1,74 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
+        "title": "lab1",
+        "year": "2021",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, et libero. Eius, ducimus laudantium minus itaque recusandae, distinctio deleniti atque ullam obcaecati, commodi illum at nemo voluptate reprehenderit quas dignissimos."
+        "description": "Introduction to basic data visualization techniques and exploratory analysis."
     },
     {
-        "title": "Repudiandae voluptatum laudantium quam?",
+        "title": "lab2",
+        "year": "2021",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Libero, illo beatae. Quasi tempora iure blanditiis sit iusto labore quaerat corrupti alias sequi debitis laudantium in voluptatum rerum suscipit voluptas, libero natus sunt cupiditate voluptatem. Provident asperiores corrupti adipisci."
+        "description": "Exploring different types of charts and their effective uses in data presentation."
     },
     {
-        "title": "Incidunt rem minus obcaecati.",
+        "title": "lab3",
+        "year": "2022",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Officia porro, minus neque laboriosam voluptatibus perspiciatis! Harum, blanditiis adipisci cupiditate officia corrupti modi ratione maiores, voluptates non eius ex tempore repellat laboriosam voluptas deserunt vitae fuga labore placeat nemo."
+        "description": "Understanding color theory in data visualization and its impact on readability."
     },
     {
-        "title": "In alias tempora natus.",
+        "title": "lab4",
+        "year": "2022",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Ratione maiores laboriosam nesciunt, libero molestiae fuga nam voluptatum incidunt ullam quas fugiat, ut minus placeat reiciendis. Amet ut, beatae deserunt quaerat, praesentium sit, doloribus minima laudantium architecto maxime nemo."
+        "description": "Creating interactive visualizations using modern JavaScript libraries."
     },
     {
-        "title": "Consectetur omnis reprehenderit mollitia.",
+        "title": "lab5",
+        "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Placeat ipsam doloribus numquam eius architecto laboriosam rerum. Suscipit voluptatem dolorem, magnam consectetur excepturi reiciendis numquam expedita, doloribus eveniet obcaecati veniam fugit. Consequuntur omnis enim in explicabo animi nesciunt fugiat?"
+        "description": "Exploring real-world datasets and applying visualization techniques to extract insights."
     },
     {
-        "title": "Natus illum soluta nemo?",
+        "title": "lab6",
+        "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nostrum amet laborum dolores aliquam quaerat, culpa voluptas vel fugiat iste rem, ipsam aspernatur natus enim quod adipisci quasi facere eveniet sunt hic dolor quos ratione? Saepe dicta adipisci nostrum."
+        "description": "Building dashboards with multiple linked visualizations for data storytelling."
     },
     {
-        "title": "Alias impedit harum officiis?",
+        "title": "lab7",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Inventore deserunt similique molestias culpa aspernatur, non vitae, suscipit quasi autem harum sequi quas error omnis veniam. Cupiditate deserunt alias accusamus minus hic fuga vero itaque rem quaerat? Veniam, dolores!"
+        "description": "Analyzing temporal data and visualizing trends over time with line and area charts."
     },
     {
-        "title": "Rem provident qui autem.",
+        "title": "lab8",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Quia, veritatis sed? Reprehenderit repellat eum laudantium accusamus voluptas veniam consectetur, facere autem, iusto dolore voluptates ab molestias sequi perferendis non necessitatibus, laboriosam dolorum iure! Quod illum ullam repellendus sapiente."
+        "description": "Exploring spatial data visualization and mapping techniques."
     },
     {
-        "title": "Quibusdam sunt autem architecto?",
+        "title": "lab9",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Quibusdam, hic neque! Ut, dolores architecto ea veritatis vitae iusto quo hic harum accusamus aut earum, deserunt beatae! Molestias eum temporibus laborum ipsum repudiandae optio quaerat deleniti asperiores quidem quas."
+        "description": "Visualizing networks and relationships between entities in complex datasets."
     },
     {
-        "title": "Magnam odio dolores quis!",
+        "title": "lab10",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Eaque aut maxime mollitia delectus quasi error sapiente amet culpa consectetur quo distinctio deserunt et, commodi iusto beatae reprehenderit architecto molestias minus quidem voluptas hic, incidunt molestiae explicabo. Magnam, culpa."
+        "description": "Creating animations and transitions to enhance data visualization narratives."
     },
     {
-        "title": "A unde minima commodi.",
+        "title": "lab11",
+        "year": "2026",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Minus magnam odit ipsam expedita, animi sint aut aperiam quaerat error. Consequatur similique, earum dolorum nemo dignissimos atque neque pariatur velit. Accusantium unde possimus velit aut consectetur omnis esse saepe."
+        "description": "Comparing different machine learning visualization techniques for model interpretation."
     },
     {
-        "title": "Quam unde laudantium corrupti!",
+        "title": "lab12",
+        "year": "2026",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Explicabo voluptatem mollitia quidem consectetur deserunt natus fugit assumenda sed quod, repudiandae odio fugiat ea molestias dolore rem iste pariatur ex impedit cumque. Commodi ducimus aliquid odio accusamus nisi neque?"
+        "description": "Final project: Applying all visualization techniques learned throughout the course."
     }
 ]
