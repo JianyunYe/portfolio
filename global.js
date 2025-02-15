@@ -68,10 +68,10 @@ const pages = [
     try {
         const basePath = window.location.hostname.includes("github.io") ? "/portfolio" : "";
         
-        const response = await fetch(`${basePath}${filename}?v=${new Date().getTime()}`);
+        const response = await fetch(`${basePath}${url}?v=${new Date().getTime()}`);
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch projects: ${response.statusText}`);
+            throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
         }
 
         const data = await response.json();
