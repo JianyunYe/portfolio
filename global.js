@@ -109,12 +109,16 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
       const title = project.title || 'Untitled Project';
       const image = project.image || 'https://via.placeholder.com/150';
       const description = project.description || 'No description available.';
+      const year = project.year || 'Unknown Year';
 
       const article = document.createElement('article');
       article.innerHTML = `
           <${headingLevel}>${title}</${headingLevel}>
           <img src="${image}" alt="${title}" onerror="this.src='https://via.placeholder.com/150';">
-          <p>${description}</p>
+          <div class="project-info">
+              <p>${description}</p>
+              <p class="project-year">${year}</p>
+          </div>
       `;
 
       containerElement.appendChild(article);

@@ -168,3 +168,51 @@ select {
 .github-stats dd {
   margin: 0;
 }
+
+.project-year {
+  color: gray;
+  font-family: Baskerville, serif;
+  font-variant-numeric: oldstyle-nums;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-top: 1em;
+  background: #f9f9f9;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.swatch {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: var(--color);
+  border-radius: 50%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.legend {
+  flex: 1;
+}
