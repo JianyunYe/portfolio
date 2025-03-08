@@ -396,8 +396,11 @@ circle.selected {
 }
 
 .item {
-  height: 30px;
-  padding: 10px;
+  min-height: 120px; /* 最小高度，允许内容增长 */
+  padding: 15px;
   box-sizing: border-box;
   border-bottom: 2px solid #eee;
+  background-color: #f9f9f9; /* 轻微背景色 */
+  margin-bottom: 5px; /* 项目间距 */
+  border-radius: 5px; /* 圆角 */
 }

@@ -1,3 +1,4 @@
+// 全局变量
 let data = [];
 let commits = [];
 const width = 1000;
@@ -10,25 +11,18 @@ let timeScale;  // 时间比例尺
 let commitMaxTime; // 选定时间的最大范围
 let filteredCommits = [];
 
-let NUM_ITEMS = commits.length;
-let ITEM_HEIGHT = 60;
+// 滚动相关变量 - 初始定义，将在加载数据后更新
+let NUM_ITEMS = 100;
+let ITEM_HEIGHT = 120;
 let VISIBLE_COUNT = 10;
 let totalHeight = (NUM_ITEMS - 1) * ITEM_HEIGHT;
 
+// DOM 元素选择
 const scrollContainer = d3.select('#scroll-container');
 const spacer = d3.select('#spacer');
-spacer.style('height', `${totalHeight}px`);
-
 const itemsContainer = d3.select('#items-container');
 
-scrollContainer.on('scroll', () => {
-  const scrollTop = scrollContainer.property('scrollTop');
-  let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
-  startIndex = Math.max(0, Math.min(startIndex, commits.length - VISIBLE_COUNT));
-  renderItems(startIndex);
-});
-
-
+// 加载数据
 async function loadData() {
     data = await d3.csv('loc.csv', (row) => ({
       ...row,
@@ -40,25 +34,15 @@ async function loadData() {
     }));
 
     processCommits();  // 确保 commits 已经处理
-    initializeTimeScale(); // 现在可以安全初始化 timeScale
+    initializeTimeScale(); // 初始化时间比例尺
 
     // ✅ 现在 `commits` 已经有数据，更新 `NUM_ITEMS`
     NUM_ITEMS = commits.length;
     totalHeight = (NUM_ITEMS - 1) * ITEM_HEIGHT;
     spacer.style('height', `${totalHeight}px`);  // ✅ 确保滚动区域正确
+}
 
-    displayStats();
-  }
-  
-document.addEventListener('DOMContentLoaded', async () => {
-    await loadData();
-    initializeTimeScale(); // 初始化时间比例尺
-    createTimeSlider();  // 创建滑块 UI
-    updateTimeDisplay(); // 更新时间显示
-    renderItems(0);
-});
-
-
+// 处理提交数据
 function processCommits() {
     commits = d3
       .groups(data, (d) => d.commit)
@@ -88,8 +72,9 @@ function processCommits() {
   
         return ret;
       });
-  }
+}
 
+// 初始化时间比例尺
 function initializeTimeScale() {
     timeScale = d3.scaleTime()
         .domain(d3.extent(commits, (d) => d.datetime))
@@ -98,7 +83,8 @@ function initializeTimeScale() {
     commitMaxTime = timeScale.invert(commitProgress);
 }
 
-  function displayStats() {
+// 显示统计信息
+function displayStats() {
     d3.select("#stats").html(""); 
     processCommits();
 
@@ -137,15 +123,29 @@ function initializeTimeScale() {
     dl.append("dd").text(maxPeriod);
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    await loadData();
-    initializeTimeScale();
-    createTimeSlider();
-    filterCommitsByTime();
-    updateScatterplot(commits); // 初始加载显示所有提交
-});
+// 创建时间滑块
+function createTimeSlider() {
+    const timeSlider = document.getElementById('time-slider');
+    timeSlider.addEventListener('input', updateTimeDisplay);
+}
 
+// 更新时间显示
+function updateTimeDisplay() {
+    commitProgress = Number(document.getElementById('time-slider').value);
+    commitMaxTime = timeScale.invert(commitProgress);
+    document.getElementById('selectedTime').textContent = commitMaxTime.toLocaleString('en', { dateStyle: "long", timeStyle: "short" });
 
+    filterCommitsByTime(); // 过滤提交数据
+    updateScatterplot(filteredCommits); // 重新渲染散点图
+    updateFileVisualization();
+}
+
+// 按时间过滤提交
+function filterCommitsByTime() {
+    filteredCommits = commits.filter(commit => commit.datetime <= commitMaxTime);
+}
+
+// 更新散点图
 function updateScatterplot(filteredCommits) {
     // 清除之前的 SVG 避免重叠
     d3.select('#chart').select('svg').remove();
@@ -244,9 +244,7 @@ function updateScatterplot(filteredCommits) {
     brushSelector(); // 重新应用刷选
 }
 
-
-
-
+// 更新提示内容
 function updateTooltipContent(commit) {
     const link = document.getElementById('commit-link');
     const date = document.getElementById('commit-date');
@@ -269,11 +267,13 @@ function updateTooltipContent(commit) {
     document.getElementById('commit-tooltip').style.display = 'block';
 }
 
+// 更新提示可见性
 function updateTooltipVisibility(isVisible) {
     const tooltip = document.getElementById('commit-tooltip');
     tooltip.hidden = !isVisible;
 }
 
+// 更新提示位置
 function updateTooltipPosition(event) {
     const tooltip = document.getElementById('commit-tooltip');
     const offsetX = 10;
@@ -283,6 +283,7 @@ function updateTooltipPosition(event) {
     tooltip.style.top = `${event.pageY + offsetY}px`;
 }
 
+// 刷选功能
 function brushSelector() {
     const svg = d3.select('svg');
     const brush = d3.brush()
@@ -295,6 +296,7 @@ function brushSelector() {
     svg.selectAll('.dots, .overlay ~ *').raise();
 }
 
+// 刷选事件
 function brushed(event) {
     let brushSelection = event.selection;
     selectedCommits = !brushSelection
@@ -312,22 +314,23 @@ function brushed(event) {
     updateLanguageBreakdown();
 }
 
-
+// 判断提交是否被选择
 function isCommitSelected(commit) {
     return selectedCommits.includes(commit);
 }
 
-
+// 更新选择状态
 function updateSelection() {
     d3.selectAll('circle').classed('selected', (d) => selectedCommits.includes(d));
 }
 
+// 更新选择数量
 function updateSelectionCount() {
     const countElement = document.getElementById('selection-count');
     countElement.textContent = `${selectedCommits.length || 'No'} commits selected`;
 }
 
-
+// 更新语言分布
 function updateLanguageBreakdown() {
     const container = document.getElementById('language-breakdown');
 
@@ -358,29 +361,11 @@ function updateLanguageBreakdown() {
     return breakdown;
 }
 
-function createTimeSlider() {
-    const timeSlider = document.getElementById('time-slider');
-    timeSlider.addEventListener('input', updateTimeDisplay);
-}
-
-function updateTimeDisplay() {
-    commitProgress = Number(document.getElementById('time-slider').value);
-    commitMaxTime = timeScale.invert(commitProgress);
-    document.getElementById('selectedTime').textContent = commitMaxTime.toLocaleString('en', { dateStyle: "long", timeStyle: "short" });
-
-    filterCommitsByTime(); // 过滤提交数据
-    updateScatterplot(filteredCommits); // 重新渲染散点图
-    updateFileVisualization();
-}
-
-function filterCommitsByTime() {
-    filteredCommits = commits.filter(commit => commit.datetime <= commitMaxTime);
-}
-
+// 文件类型颜色
 let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
 
+// 更新文件可视化
 function updateFileVisualization() {
-
     let lines = filteredCommits.flatMap((d) => d.lines);
     let files = [];
     files = d3
@@ -414,41 +399,9 @@ function updateFileVisualization() {
         .style('background', d => fileTypeColors(d.type));
 }
 
-function renderItems(startIndex) {
-    // 清空当前的 commit 项
-    itemsContainer.selectAll('div').remove();
-
-    const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
-    let newCommitSlice = commits.slice(startIndex, endIndex);
-
-    // ✅ 让 scatterplot 也只显示这些 commits
-    updateScatterplot(newCommitSlice);
-    updateFileVisualization(newCommitSlice);
-
-    // 绑定 commit 数据
-    itemsContainer.selectAll('div')
-                  .data(newCommitSlice)
-                  .enter()
-                  .append('div')
-                  .attr('class', 'item')
-                  .style('position', 'absolute')
-                  .style('top', (_, idx) => `${idx * ITEM_HEIGHT}px`)
-                  .html(d => `
-                      <p>
-                        On ${d.datetime.toLocaleString("en", {dateStyle: "full", timeStyle: "short"})},
-                        I made
-                        <a href="${d.url}" target="_blank">
-                          ${startIndex > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'}
-                        </a>.
-                        I edited ${d.totalLines} lines across 
-                        ${d3.rollups(d.lines, D => D.length, d => d.file).length} files.
-                        Then I looked over all I had made, and I saw that it was very good.
-                      </p>
-                  `);
-}
-
-function displayCommitFiles(filteredCommits) {
-    const lines = filteredCommits.flatMap((d) => d.lines);
+// 显示提交文件
+function displayCommitFiles(visibleCommits) {
+    const lines = visibleCommits.flatMap((d) => d.lines);
     let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
 
     let files = d3.groups(lines, (d) => d.file).map(([name, lines]) => ({ name, lines }));
@@ -466,3 +419,60 @@ function displayCommitFiles(filteredCommits) {
                   .attr('class', 'line')
                   .style('background', d => fileTypeColors(d.type));
 }
+
+// 渲染滚动项
+function renderItems(startIndex) {
+    // 清空当前的 commit 项
+    itemsContainer.selectAll('div').remove();
+
+    const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
+    let newCommitSlice = commits.slice(startIndex, endIndex);
+
+    // ✅ 让 scatterplot 也只显示这些 commits
+    updateScatterplot(newCommitSlice);
+    displayCommitFiles(newCommitSlice);  // ✅ 改为使用displayCommitFiles函数
+
+    // 绑定 commit 数据
+    itemsContainer.selectAll('div')
+                  .data(newCommitSlice)
+                  .enter()
+                  .append('div')
+                  .attr('class', 'item')
+                  .style('position', 'absolute')
+                  .style('top', (_, idx) => `${idx * ITEM_HEIGHT}px`)
+                  .html((d, index) => `
+                      <p>
+                        On ${d.datetime.toLocaleString("en", {dateStyle: "full", timeStyle: "short"})},
+                        I made
+                        <a href="${d.url}" target="_blank">
+                          ${(index + startIndex) > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'}
+                        </a>.
+                        I edited ${d.totalLines} lines across 
+                        ${d3.rollups(d.lines, D => D.length, d => d.file).length} files.
+                        Then I looked over all I had made, and I saw that it was very good.
+                      </p>
+                  `);
+}
+
+// 滚动事件监听
+scrollContainer.on('scroll', () => {
+  const scrollTop = scrollContainer.property('scrollTop');
+  let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
+  startIndex = Math.max(0, Math.min(startIndex, commits.length - VISIBLE_COUNT));
+  renderItems(startIndex);
+});
+
+// ✅ 将多个DOMContentLoaded合并为一个
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadData();
+  displayStats();
+  
+  // 可选：初始化时间滑块(如果你想保留它)
+  createTimeSlider();
+  
+  // 初始渲染第一批项目
+  renderItems(0);
+
+  // 可选：隐藏时间滑块容器(如果你想用scrollytelling替代它)
+  document.querySelector('.time-slider-container').style.display = 'none';
+});
