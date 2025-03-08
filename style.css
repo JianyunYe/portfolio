@@ -281,9 +281,6 @@ circle {
   transform-origin: center;
   transform-box: fill-box;
 
-  @starting-style {
-    r: 0;
-  }
 }
 
 
@@ -362,13 +359,13 @@ circle.selected {
 #scrollytelling {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: subgrid;
+  grid-template-columns: 2fr 1fr;
 }
 
 #scroll-container {
   grid-column: 1;
   position: relative;
-  width: 95%;
+  width: 100%;
   height: 350px;
   overflow-y: scroll;
   border: 1px solid #ccc;
@@ -396,11 +393,9 @@ circle.selected {
 }
 
 .item {
-  min-height: 120px; /* 最小高度，允许内容增长 */
-  padding: 15px;
+  height: 120px;
+  padding: 10px;
   box-sizing: border-box;
   border-bottom: 2px solid #eee;
-  background-color: #f9f9f9; /* 轻微背景色 */
-  margin-bottom: 5px; /* 项目间距 */
-  border-radius: 5px; /* 圆角 */
+  overflow: visible;
 }
