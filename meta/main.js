@@ -474,5 +474,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderItems(0);
 
   // 可选：隐藏时间滑块容器(如果你想用scrollytelling替代它)
-  document.querySelector('.time-slider-container').style.display = 'none';
+  // document.querySelector('.time-slider-container').style.display = 'none';
 });
